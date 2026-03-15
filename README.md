@@ -2,15 +2,18 @@
 
 A simple **Configuration Management Database (CMDB)** and **IT Asset Support System** built using **Django**.
 
-This application allows users to search assets, raise issues, communicate with administrators, and assign engineers to resolve problems.
+This application allows users to search IT assets, report issues, communicate with administrators, and assign engineers to resolve problems.
+
+Repository:
+https://github.com/Misrabharat/cmdb_manoj
 
 ---
 
 # Features
 
-• User Login
+• User Login System
 • Asset Search
-• Asset Details View
+• Asset Detail Page
 • Chat / Comment System
 • Admin Assignment to Engineers
 • Status Tracking (Open / In Progress / Resolved)
@@ -37,13 +40,13 @@ Libraries Used:
 # Project Structure
 
 ```
-asset_management/
+cmdb_manoj/
 │
-├── assets/                # Django app
-├── config/                # Django project settings
-├── templates/             # HTML templates
-├── assets.xlsx            # Sample asset data
-├── import_excel.py        # Script to import Excel data
+├── assets/                 # Django app
+├── config/                 # Django project settings
+├── templates/              # HTML templates
+├── assets.xlsx             # Sample asset data
+├── import_excel.py         # Excel import script
 ├── manage.py
 ├── requirements.txt
 └── README.md
@@ -62,19 +65,19 @@ https://www.python.org/downloads/
 
 # Installation Steps
 
-1. Clone the repository
+### 1. Clone the repository
 
 ```
-git clone https://github.com/YOUR_USERNAME/cmdb-asset-management.git
+git clone https://github.com/Misrabharat/cmdb_manoj.git
 ```
 
-2. Navigate to the project folder
+### 2. Navigate to project folder
 
 ```
-cd cmdb-asset-management
+cd cmdb_manoj
 ```
 
-3. Create virtual environment
+### 3. Create virtual environment
 
 Windows:
 
@@ -82,7 +85,7 @@ Windows:
 python -m venv venv
 ```
 
-4. Activate virtual environment
+### 4. Activate virtual environment
 
 Windows:
 
@@ -90,31 +93,31 @@ Windows:
 venv\Scripts\activate
 ```
 
-5. Install required packages
+### 5. Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-6. Run database migrations
+### 6. Run database migrations
 
 ```
 python manage.py migrate
 ```
 
-7. Create admin user
+### 7. Create admin user
 
 ```
 python manage.py createsuperuser
 ```
 
-8. Start the server
+### 8. Run the application
 
 ```
 python manage.py runserver
 ```
 
-9. Open the application
+### 9. Open the application
 
 ```
 http://127.0.0.1:8000
@@ -124,53 +127,41 @@ http://127.0.0.1:8000
 
 # Import Asset Data (Optional)
 
-To import asset data from Excel:
+To import assets from Excel:
 
 ```
 python import_excel.py
 ```
 
-This will load asset information into the database.
+This will load asset records into the database.
 
 ---
 
 # Application Workflow
 
-User → Search Asset
-User → Raise Issue / Comment
-Admin → Review Issue
-Admin → Assign Engineer
-Engineer → Resolve Issue
-Admin → Mark Status Resolved
+User => Search Asset
+User => Raise Issue / Comment
+Admin => Review Issue
+Admin => Assign Engineer
+Engineer => Resolve Issue
+Admin => Update Status (Resolved)
 
 ---
 
 # Admin Panel
 
-Access Django Admin Panel:
+Access Admin Panel:
 
 ```
 http://127.0.0.1:8000/admin
 ```
 
-Admin can:
+Admin capabilities:
 
 • Manage assets
 • Assign engineers
 • View chat history
 • Update issue status
-
----
-
-# Screens
-
-Main features include:
-
-• Asset Search Dashboard
-• Asset Details Page
-• Comment / Chat System
-• Admin Assignment System
-• Status Tracking
 
 ---
 
@@ -187,11 +178,13 @@ Main features include:
 
 # Author
 
-Developed as a Proof of Concept CMDB / IT Support System using Django.
+Bharat Mishra
+
+GitHub:
+https://github.com/Misrabharat
 
 ---
 
 # License
 
-This project is for educational and demonstration purposes.
-
+This project is for **educational and demonstration purposes**.
