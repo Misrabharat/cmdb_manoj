@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Asset Search</h3>
+
+<form method="get">
+
+<div class="input-group mb-3">
+
+<input type="text"
+name="q"
+class="form-control"
+placeholder="Search Serial, Asset Tag, Brand..."
+value="{{ request.GET.q }}">
+
+<button class="btn btn-primary">Search</button>
+
+</div>
+
+</form>
+
+
+{% if results %}
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-striped">
+
+<thead>
+
+<tr>
+
+<th>Serial Number</th>
+<th>Company</th>
+<th>Computer Type</th>
+<th>Brand</th>
+<th>Model</th>
+<th>Year</th>
+<th>Asset Tag</th>
+<th>State</th>
+<th>Status</th>
+<th>Assigned To</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for asset in results %}
+
+<tr>
+
+<td>{{ asset.serial_number|default:"-" }}</td>
+<td>{{ asset.company|default:"-" }}</td>
+<td>{{ asset.computer_type|default:"-" }}</td>
+<td>{{ asset.brand|default:"-" }}</td>
+<td>{{ asset.model|default:"-" }}</td>
+<td>{{ asset.year|default:"-" }}</td>
+<td>{{ asset.opco_asset_tag|default:"-" }}</td>
+<td>{{ asset.state|default:"-" }}</td>
+<td>
+
+{% if asset.status == "open" %}
+<span class="badge bg-danger">Open</span>
+
+{% elif asset.status == "progress" %}
+<span class="badge bg-warning">In Progress</span>
+
+{% elif asset.status == "resolved" %}
+<span class="badge bg-success">Resolved</span>
+
+{% else %}
+<span class="badge bg-secondary">Unknown</span>
+{% endif %}
+
+</td>
+<td>
+
+{% if asset.assignment_set.last %}
+{{ asset.assignment_set.last.assigned_to }}
+{% else %}
+Not Assigned
+{% endif %}
+
+</td>
+
+<td>
+
+<a href="/asset/{{ asset.id }}" class="btn btn-success btn-sm">
+Open
+</a>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="10" class="text-center">
+No assets found
+</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% else %}
+
+<p class="text-muted">Search for an asset above.</p>
+
+{% endif %}
+
+{% endblock %}

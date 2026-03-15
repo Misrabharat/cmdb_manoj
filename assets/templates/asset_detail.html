@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card mb-3">
+<div class="card-body">
+
+<h3>Asset: {{ asset.opco_asset_tag }}</h3>
+
+<div class="row">
+
+<div class="col-md-4">
+<b>Brand:</b> {{ asset.brand|default:"-" }}
+</div>
+
+<div class="col-md-4">
+<b>Model:</b> {{ asset.model|default:"-" }}
+</div>
+
+<div class="col-md-4">
+<b>Year:</b> {{ asset.year|default:"-" }}
+</div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+<div class="col-md-4">
+<b>Status:</b>
+
+{% if asset.status == "open" %}
+<span class="badge bg-danger">Open</span>
+
+{% elif asset.status == "progress" %}
+<span class="badge bg-warning">In Progress</span>
+
+{% elif asset.status == "resolved" %}
+<span class="badge bg-success">Resolved</span>
+
+{% endif %}
+
+</div>
+
+<div class="col-md-4">
+<b>Assigned To:</b>
+
+{% if asset.assignment_set.last %}
+{{ asset.assignment_set.last.assigned_to }}
+{% else %}
+<span class="text-danger">Not Assigned</span>
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<h4>Chat / Comments</h4>
+
+{% if comments %}
+
+{% for c in comments %}
+
+<div class="card mb-2">
+<div class="card-body">
+
+<b>{{ c.user.username }}</b>
+<small class="text-muted">{{ c.created_at }}</small>
+
+<p class="mt-2">{{ c.message }}</p>
+
+</div>
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p class="text-muted">No comments yet.</p>
+
+{% endif %}
+
+
+<hr>
+
+<h4>Add Comment</h4>
+
+<form method="post">
+
+{% csrf_token %}
+
+<textarea name="message"
+class="form-control"
+rows="3"
+placeholder="Write comment..."></textarea>
+
+<br>
+
+{% if user.is_staff %}
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Assign Engineer</label>
+
+<select name="assign_to" class="form-control">
+
+<option value="">Select Engineer</option>
+
+{% for u in users %}
+<option value="{{u.username}}">{{u.username}}</option>
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<div class="col-md-6">
+
+<label>Update Status</label>
+
+<select name="status" class="form-control">
+
+<option value="">Select Status</option>
+<option value="open">Open</option>
+<option value="progress">In Progress</option>
+<option value="resolved">Resolved</option>
+
+</select>
+
+</div>
+
+</div>
+
+{% endif %}
+
+<br>
+
+<button class="btn btn-primary">Send</button>
+
+</form>
+
+{% endblock %}
