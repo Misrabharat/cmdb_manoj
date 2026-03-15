@@ -1,6 +1,6 @@
-# CMDB Asset Management System (Django)
+# CMDB (Django)
 
-A simple **Configuration Management Database (CMDB)** and **IT Asset Support System** built using **Django**.
+A simple **Computer Management System** built using **Django**.
 
 This application allows users to search IT assets, report issues, communicate with administrators, and assign engineers to resolve problems.
 
